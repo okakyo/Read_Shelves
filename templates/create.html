@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<form action="" method="get">
+    <table>
+        <tr>
+            <td>{{form_url}}</td>
+            <button>データ取得</button>
+        </tr>
+    </table>
+</form>
+
+{{text|safe}}
+
+{% endblock %}
