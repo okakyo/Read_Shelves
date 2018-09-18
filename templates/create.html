@@ -1,15 +1,19 @@
 {% extends 'base.html' %}
 {% block content %}
+
 <form action="" method="get">
     <h2>ここにスクレイピングしたいURLを入力してください。</h2>
     <table>
-        <tr>
-            <td>{{form_url}}</td>
-            <button>データ取得</button>
-        </tr>
+        {% csrf_token %}
+        {{form.as_table}}
+        <button>データ取得</button>
+
     </table>
 </form>
-
 {{text|safe}}
-
+<form action="" method="post">
+    <table>
+        <button>保存する</button>
+    </table>
+</form>
 {% endblock %}

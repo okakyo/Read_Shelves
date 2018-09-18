@@ -6,9 +6,12 @@
     <link rel="stylesheet" href="{% static 'css/index.css' %}">
     <script src="{% static 'js/jquery-3.3.1.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}" ></script>
-    <title>{{title}}</title>
+    <title>{{Title}}</title>
 </head>
-<header>{{theme}}</header>
+<header>
+
+    <h1>{{title}}</h1>
+</header>
     <body>
     {% block content %}{% endblock %}
     </body>
