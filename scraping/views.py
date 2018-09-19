@@ -1,22 +1,18 @@
 from .models import  Article
-from django.views.generic import CreateView,TemplateView,DeleteView,UpdateView
+from django.views.generic import ListView,CreateView,TemplateView,DeleteView,UpdateView
 from .scraping import get_article
 from .forms import url_forms
 from django.shortcuts import render
+import datetime
 
-class Index_Article(TemplateView):
+
+class Index_Article(ListView):
     template_name = 'index.html'
-
-    def __init__(self):
-        super().__init__()
-
-        self.param={
-
-            'model':Article.objects.all()
-        }
+    paginate_by = 5
+    model = Article
 
     def get(self, request, *args, **kwargs):
-        return super().get(request,self.param)
+        return super().get(request,*args,**kwargs)
 
 class Create_Article(CreateView):
     model = Article
@@ -26,11 +22,27 @@ class Create_Article(CreateView):
 
     def __init__(self):
         super().__init__()
+        self.param={
+            'title':'',
+            'url':'',
+            'text':''
+        }
 
     def get(self, request, *args, **kwargs):
-        url=request.POST['url']
-        text=get_article(url)
+        title=request.GET.get('title')
+        url=request.GET.get('url')
+        self.param['title']='title',
+        self.param['url']=url
+        self.param['text']=get_article(url)
         return super().get(request,*args,**kwargs)
+
+    def post(self, request, *args, **kwargs):
+        if self.param['title']=='':
+            self.param['title']=datetime.date.today()
+
+
+
+        return super(Create_Article, self).post(request,*args,**kwargs)
 
 
 class Update_Article(UpdateView):
