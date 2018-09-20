@@ -29,19 +29,13 @@ class Create_Article(CreateView):
         }
 
     def get(self, request, *args, **kwargs):
-        title=request.GET.get('title')
-        url=request.GET.get('url')
-        self.param['title']='title',
-        self.param['url']=url
-        self.param['text']=get_article(url)
+        
         return super().get(request,*args,**kwargs)
 
     def post(self, request, *args, **kwargs):
         if self.param['title']=='':
             self.param['title']=datetime.date.today()
-
-
-
+    
         return super(Create_Article, self).post(request,*args,**kwargs)
 
 
@@ -62,6 +56,9 @@ class Delete_Article(DeleteView):
     success_url = '/'
     def __init__(self):
         super().__init__()
+        self.param={
+            'message':'このノートを削除しますか'
+        }
     def get(self, request, *args, **kwargs):
         pass
     def post(self, request, *args, **kwargs):
