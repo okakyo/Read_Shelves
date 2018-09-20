@@ -7,16 +7,17 @@ import datetime
 
 
 class Index_Article(ListView):
-    template_name = 'index.html'
+    template_name = 'basic/index.html'
     paginate_by = 5
     model = Article
 
     def get(self, request, *args, **kwargs):
         return super().get(request,*args,**kwargs)
 
+
 class Create_Article(CreateView):
     model = Article
-    template_name = 'create.html'
+    template_name = 'basic/create.html'
     form_class = url_forms
     success_url = '/'
 
@@ -29,7 +30,6 @@ class Create_Article(CreateView):
         }
 
     def get(self, request, *args, **kwargs):
-        
         return super().get(request,*args,**kwargs)
 
     def post(self, request, *args, **kwargs):
@@ -41,7 +41,7 @@ class Create_Article(CreateView):
 
 class Update_Article(UpdateView):
     model = Article
-    template_name = 'update.html'
+    template_name = 'baisc/update.html'
 
     def get(self, request, *args, **kwargs):
         return super().get(request,*args,**kwargs)
@@ -52,7 +52,7 @@ class Update_Article(UpdateView):
 
 class Delete_Article(DeleteView):
     model = Article
-    template_name = 'delete.html'
+    template_name = 'basic/delete.html'
     success_url = '/'
     def __init__(self):
         super().__init__()
@@ -63,6 +63,3 @@ class Delete_Article(DeleteView):
         pass
     def post(self, request, *args, **kwargs):
         pass
-
-
-
